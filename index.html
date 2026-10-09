@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yash Gayake | Portfolio & Engineering Platform</title>
+    <meta name="description" content="Production-ready full-stack portfolio and developer platform for Yash Gayake, Automation & Robotics Student and Developer." />
+    <meta name="author" content="Yash Gayake" />
+    <meta name="keywords" content="Yash Gayake, Automation and Robotics, Developer, Software Engineer, Portfolio, Cybersecurity, DevOps, Robotics, Full-Stack" />
+    
+    <!-- OpenGraph Metadata -->
+    <meta property="og:title" content="Yash Gayake | Portfolio & Engineering Platform" />
+    <meta property="og:description" content="Production-ready full-stack portfolio and developer platform for Yash Gayake, Automation & Robotics Student and Developer." />
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Yash Gayake Portfolio" />
+    
+    <!-- Twitter / X Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Yash Gayake | Automation & Robotics Student & Developer" />
+    <meta name="twitter:description" content="Official portfolio and engineering platform of Yash Gayake. Automation & Robotics Student, Developer, and Technology Enthusiast." />
+
+    <!-- PWA Web App Manifest & Theme Color -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#06b6d4" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <!-- Google Fonts: Plus Jakarta Sans for UI + JetBrains Mono for Code & Technical Readouts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Anti-flicker Theme Initialization -->
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('yash_theme');
+          var isDark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (isDark) {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+            document.documentElement.setAttribute('data-theme', 'dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.add('light');
+            document.documentElement.setAttribute('data-theme', 'light');
+          }
+        } catch (e) {}
+      })();
+    </script>
+
+    <!-- Schema.org Person & ProfilePage Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Yash Gayake",
+      "jobTitle": "Automation & Robotics Student | Developer",
+      "email": "yashgayake900@gmail.com",
+      "description": "Building with code, exploring robotics, and continuously learning modern technologies across software, automation, and cybersecurity.",
+      "knowsAbout": [
+        "Software Development",
+        "Automation & Robotics",
+        "Cybersecurity",
+        "DevOps",
+        "AI/ML",
+        "Blockchain"
+      ]
+    }
+    </script>
+  </head>
+  <body class="bg-neutral-950 text-neutral-100 antialiased font-sans selection:bg-cyan-500/20 selection:text-cyan-200">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

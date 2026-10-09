@@ -1,0 +1,359 @@
+{
+  "entities": {
+    "Settings": {
+      "title": "Settings",
+      "description": "Global portfolio settings, personal bio, and contact information",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 100 },
+        "professionalTitle": { "type": "string", "maxLength": 200 },
+        "tagline": { "type": "string", "maxLength": 300 },
+        "bio": { "type": "string", "maxLength": 5000 },
+        "email": { "type": "string", "maxLength": 150 },
+        "location": { "type": "string", "maxLength": 150 },
+        "githubUrl": { "type": "string", "maxLength": 300 },
+        "linkedinUrl": { "type": "string", "maxLength": 300 },
+        "updatedAt": { "type": "string", "maxLength": 100 }
+      },
+      "required": ["name", "email"]
+    },
+    "Project": {
+      "title": "Project",
+      "description": "Technical and engineering projects showcase",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 200 },
+        "slug": { "type": "string", "maxLength": 150 },
+        "shortDescription": { "type": "string", "maxLength": 500 },
+        "fullDescription": { "type": "string", "maxLength": 10000 },
+        "category": { "type": "string", "maxLength": 100 },
+        "technologies": { "type": "array" },
+        "githubUrl": { "type": "string", "maxLength": 500 },
+        "liveUrl": { "type": "string", "maxLength": 500 },
+        "featured": { "type": "boolean" },
+        "status": { "type": "string", "maxLength": 50 },
+        "createdAt": { "type": "string", "maxLength": 100 }
+      },
+      "required": ["title", "slug", "category"]
+    },
+    "Skill": {
+      "title": "Skill",
+      "description": "Technical skill with category and proficiency level",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 100 },
+        "category": { "type": "string", "maxLength": 100 },
+        "level": { "type": "string", "maxLength": 50 },
+        "order": { "type": "number" }
+      },
+      "required": ["name", "category"]
+    },
+    "Experience": {
+      "title": "Experience",
+      "description": "Internship, robotics competition, and engineering experience",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "position": { "type": "string", "maxLength": 200 },
+        "organization": { "type": "string", "maxLength": 200 },
+        "category": { "type": "string", "maxLength": 100 },
+        "startDate": { "type": "string", "maxLength": 50 },
+        "endDate": { "type": "string", "maxLength": 50 },
+        "current": { "type": "boolean" },
+        "description": { "type": "string", "maxLength": 5000 },
+        "technologies": { "type": "array" }
+      },
+      "required": ["position", "organization", "startDate"]
+    },
+    "Education": {
+      "title": "Education",
+      "description": "Academic background and formal coursework",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "degree": { "type": "string", "maxLength": 200 },
+        "institution": { "type": "string", "maxLength": 200 },
+        "branch": { "type": "string", "maxLength": 200 },
+        "startYear": { "type": "string", "maxLength": 50 },
+        "endYear": { "type": "string", "maxLength": 50 },
+        "description": { "type": "string", "maxLength": 3000 },
+        "achievements": { "type": "array" }
+      },
+      "required": ["degree", "institution"]
+    },
+    "Certification": {
+      "title": "Certification",
+      "description": "Technical certifications and verified credentials",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 200 },
+        "issuingOrganization": { "type": "string", "maxLength": 200 },
+        "issueDate": { "type": "string", "maxLength": 50 },
+        "credentialId": { "type": "string", "maxLength": 150 },
+        "credentialUrl": { "type": "string", "maxLength": 500 },
+        "relatedSkills": { "type": "array" }
+      },
+      "required": ["name", "issuingOrganization"]
+    },
+    "Achievement": {
+      "title": "Achievement",
+      "description": "Honors, recognitions, and competitive milestones",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 200 },
+        "organization": { "type": "string", "maxLength": 200 },
+        "date": { "type": "string", "maxLength": 50 },
+        "description": { "type": "string", "maxLength": 2000 }
+      },
+      "required": ["title", "organization"]
+    },
+    "Article": {
+      "title": "Article",
+      "description": "Engineering logs, tutorials, and technical writeups",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 300 },
+        "slug": { "type": "string", "maxLength": 200 },
+        "category": { "type": "string", "maxLength": 100 },
+        "excerpt": { "type": "string", "maxLength": 1000 },
+        "content": { "type": "string", "maxLength": 50000 },
+        "readingTimeMinutes": { "type": "number" },
+        "published": { "type": "boolean" },
+        "publishedDate": { "type": "string", "maxLength": 50 },
+        "tags": { "type": "array" }
+      },
+      "required": ["title", "slug", "content"]
+    },
+    "ContactMessage": {
+      "title": "ContactMessage",
+      "description": "Inquiries and messages submitted by portfolio visitors",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "maxLength": 150 },
+        "subject": { "type": "string", "maxLength": 200 },
+        "message": { "type": "string", "maxLength": 5000 },
+        "createdAt": { "type": "string", "maxLength": 100 },
+        "read": { "type": "boolean" },
+        "senderUid": { "type": "string", "maxLength": 128 }
+      },
+      "required": ["name", "email", "subject", "message"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Authenticated user profile and session records",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "displayName": { "type": "string", "maxLength": 150 },
+        "email": { "type": "string", "maxLength": 150 },
+        "photoURL": { "type": "string", "maxLength": 500 },
+        "role": { "type": "string", "maxLength": 50 },
+        "createdAt": { "type": "string", "maxLength": 100 }
+      },
+      "required": ["uid", "email"]
+    },
+    "Admin": {
+      "title": "Admin",
+      "description": "Designated administrator record for RBAC",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 150 },
+        "role": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["uid", "email"]
+    },
+    "Course": {
+      "title": "Course",
+      "description": "Academy course curriculum, YouTube lecture playlist, pricing and metadata",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 200 },
+        "slug": { "type": "string", "maxLength": 150 },
+        "tagline": { "type": "string", "maxLength": 300 },
+        "description": { "type": "string", "maxLength": 5000 },
+        "category": { "type": "string", "maxLength": 100 },
+        "level": { "type": "string", "maxLength": 50 },
+        "price": { "type": "number" },
+        "originalPrice": { "type": "number" },
+        "previewYoutubeVideoId": { "type": "string", "maxLength": 100 },
+        "thumbnail": { "type": "string", "maxLength": 500 },
+        "lectures": { "type": "array" },
+        "learningOutcomes": { "type": "array" },
+        "requirements": { "type": "array" },
+        "featured": { "type": "boolean" },
+        "published": { "type": "boolean" },
+        "createdAt": { "type": "string", "maxLength": 100 },
+        "updatedAt": { "type": "string", "maxLength": 100 }
+      },
+      "required": ["title", "category"]
+    },
+    "NoteResource": {
+      "title": "NoteResource",
+      "description": "Downloadable lecture notes, cheat sheets, and course handbooks",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 200 },
+        "description": { "type": "string", "maxLength": 3000 },
+        "category": { "type": "string", "maxLength": 100 },
+        "courseId": { "type": "string", "maxLength": 128 },
+        "price": { "type": "number" },
+        "pageCount": { "type": "number" },
+        "fileFormat": { "type": "string", "maxLength": 20 },
+        "previewPages": { "type": "array" },
+        "downloadUrl": { "type": "string", "maxLength": 500 }
+      },
+      "required": ["title", "category"]
+    },
+    "StudentProfile": {
+      "title": "StudentProfile",
+      "description": "Student user profile, enrolled courses, and purchased notes",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 150 },
+        "displayName": { "type": "string", "maxLength": 150 },
+        "avatar": { "type": "string", "maxLength": 500 },
+        "enrolledCourseIds": { "type": "array" },
+        "purchasedNoteIds": { "type": "array" },
+        "joinedAt": { "type": "string", "maxLength": 100 }
+      },
+      "required": ["uid", "email"]
+    },
+    "StudentProgress": {
+      "title": "StudentProgress",
+      "description": "Student course lecture completion tracking and progress percentages",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "studentUid": { "type": "string", "maxLength": 128 },
+        "courseId": { "type": "string", "maxLength": 128 },
+        "completedLectureIds": { "type": "array" },
+        "progressPercent": { "type": "number" },
+        "lastLectureId": { "type": "string", "maxLength": 128 },
+        "updatedAt": { "type": "string", "maxLength": 100 }
+      },
+      "required": ["studentUid", "courseId"]
+    },
+    "StudentCertificate": {
+      "title": "StudentCertificate",
+      "description": "Official verifiable completion certificate for students",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "certificateNumber": { "type": "string", "maxLength": 100 },
+        "studentUid": { "type": "string", "maxLength": 128 },
+        "studentName": { "type": "string", "maxLength": 150 },
+        "studentEmail": { "type": "string", "maxLength": 150 },
+        "courseId": { "type": "string", "maxLength": 128 },
+        "courseTitle": { "type": "string", "maxLength": 200 },
+        "issueDate": { "type": "string", "maxLength": 100 },
+        "grade": { "type": "string", "maxLength": 50 },
+        "verificationCode": { "type": "string", "maxLength": 100 }
+      },
+      "required": ["studentUid", "courseId", "certificateNumber"]
+    },
+    "StudentWork": {
+      "title": "StudentWork",
+      "description": "Student project submissions, practical assignments, and instructor grading/feedback",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "studentUid": { "type": "string", "maxLength": 128 },
+        "studentName": { "type": "string", "maxLength": 150 },
+        "studentEmail": { "type": "string", "maxLength": 150 },
+        "courseId": { "type": "string", "maxLength": 128 },
+        "courseTitle": { "type": "string", "maxLength": 200 },
+        "title": { "type": "string", "maxLength": 200 },
+        "description": { "type": "string", "maxLength": 4000 },
+        "projectUrl": { "type": "string", "maxLength": 500 },
+        "repoUrl": { "type": "string", "maxLength": 500 },
+        "submittedAt": { "type": "string", "maxLength": 100 },
+        "status": { "type": "string", "maxLength": 50 },
+        "instructorFeedback": { "type": "string", "maxLength": 4000 },
+        "grade": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["studentUid", "title"]
+    }
+  },
+  "firestore": {
+    "/settings/{settingId}": {
+      "schema": { "$ref": "#/entities/Settings" },
+      "description": "Portfolio site configuration and personal profile info"
+    },
+    "/projects/{projectId}": {
+      "schema": { "$ref": "#/entities/Project" },
+      "description": "Engineering showcase projects"
+    },
+    "/skills/{skillId}": {
+      "schema": { "$ref": "#/entities/Skill" },
+      "description": "Technical skills categorization and proficiencies"
+    },
+    "/experience/{experienceId}": {
+      "schema": { "$ref": "#/entities/Experience" },
+      "description": "Work and engineering activity experience items"
+    },
+    "/education/{educationId}": {
+      "schema": { "$ref": "#/entities/Education" },
+      "description": "Academic qualifications and coursework records"
+    },
+    "/certifications/{certificationId}": {
+      "schema": { "$ref": "#/entities/Certification" },
+      "description": "Verified certificates and credentials"
+    },
+    "/achievements/{achievementId}": {
+      "schema": { "$ref": "#/entities/Achievement" },
+      "description": "Awards and competitive honors"
+    },
+    "/articles/{articleId}": {
+      "schema": { "$ref": "#/entities/Article" },
+      "description": "Technical articles and engineering logs"
+    },
+    "/messages/{messageId}": {
+      "schema": { "$ref": "#/entities/ContactMessage" },
+      "description": "Contact form submissions from visitors"
+    },
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Authenticated user records"
+    },
+    "/admins/{adminId}": {
+      "schema": { "$ref": "#/entities/Admin" },
+      "description": "Authorized admin users for portfolio CMS"
+    },
+    "/courses/{courseId}": {
+      "schema": { "$ref": "#/entities/Course" },
+      "description": "Academy course catalog, YouTube playlists, and pricing"
+    },
+    "/notes/{noteId}": {
+      "schema": { "$ref": "#/entities/NoteResource" },
+      "description": "Downloadable lecture notes and technical cheatsheets"
+    },
+    "/students/{studentId}": {
+      "schema": { "$ref": "#/entities/StudentProfile" },
+      "description": "Student accounts and enrolled courses"
+    },
+    "/student_progress/{progressId}": {
+      "schema": { "$ref": "#/entities/StudentProgress" },
+      "description": "Student lecture completion status and progress"
+    },
+    "/student_certificates/{certificateId}": {
+      "schema": { "$ref": "#/entities/StudentCertificate" },
+      "description": "Verifiable course completion certificates"
+    },
+    "/student_works/{workId}": {
+      "schema": { "$ref": "#/entities/StudentWork" },
+      "description": "Student course project works, GitHub repo submissions, and instructor feedback"
+    }
+  }
+}

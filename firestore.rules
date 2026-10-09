@@ -1,0 +1,157 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Global catch-all default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == 'yashgayake900@gmail.com' ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    // Connection test document
+    match /test/connection {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Settings
+    match /settings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Projects
+    match /projects/{projectId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Skills
+    match /skills/{skillId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Experience
+    match /experience/{experienceId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Education
+    match /education/{educationId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Certifications
+    match /certifications/{certificationId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Achievements
+    match /achievements/{achievementId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Articles
+    match /articles/{articleId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Contact Messages: Anyone can create a valid message; only admin can read/update/delete
+    match /messages/{messageId} {
+      allow create: if isValidId(messageId) &&
+        incoming().name is string && incoming().name.size() > 0 && incoming().name.size() <= 100 &&
+        incoming().email is string && incoming().email.size() > 0 && incoming().email.size() <= 150 &&
+        incoming().subject is string && incoming().subject.size() > 0 && incoming().subject.size() <= 200 &&
+        incoming().message is string && incoming().message.size() > 0 && incoming().message.size() <= 5000;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // User Profiles: Protected PII
+    match /users/{userId} {
+      allow get: if isSignedIn() && (request.auth.uid == userId || isAdmin());
+      allow list: if isAdmin();
+      allow create: if isSignedIn() && request.auth.uid == userId &&
+        incoming().uid == request.auth.uid &&
+        (!('role' in incoming()) || incoming().role != 'admin' || isAdmin());
+      allow update: if isSignedIn() && request.auth.uid == userId &&
+        (!incoming().diff(existing()).affectedKeys().hasAny(['role', 'uid']) || isAdmin());
+      allow delete: if isAdmin();
+    }
+
+    // Admins collection
+    match /admins/{adminId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Courses: Publicly viewable catalog; Admin managed
+    match /courses/{courseId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Notes: Publicly viewable notes list; Admin managed
+    match /notes/{noteId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Student Profiles: Owner or Admin read/write
+    match /students/{studentId} {
+      allow get: if isSignedIn() && (request.auth.uid == studentId || isAdmin());
+      allow list: if isAdmin();
+      allow create, update: if isSignedIn() && (request.auth.uid == studentId || isAdmin());
+      allow delete: if isAdmin();
+    }
+
+    // Student Progress: Student tracks their lecture completions
+    match /student_progress/{progressId} {
+      allow read: if isSignedIn() && (resource.data.studentUid == request.auth.uid || isAdmin());
+      allow create: if isSignedIn() && (incoming().studentUid == request.auth.uid || isAdmin());
+      allow update: if isSignedIn() && (resource.data.studentUid == request.auth.uid || isAdmin());
+      allow delete: if isAdmin();
+    }
+
+    // Student Certificates: Publicly verifiable by ID; created upon course completion
+    match /student_certificates/{certificateId} {
+      allow read: if true;
+      allow create: if isSignedIn() && (incoming().studentUid == request.auth.uid || isAdmin());
+      allow update, delete: if isAdmin();
+    }
+
+    // Student Works: Students submit portfolio works & projects; Admin reviews and grades
+    match /student_works/{workId} {
+      allow read: if isSignedIn() && (resource.data.studentUid == request.auth.uid || isAdmin());
+      allow create: if isSignedIn() && incoming().studentUid == request.auth.uid;
+      allow update: if isSignedIn() && (resource.data.studentUid == request.auth.uid || isAdmin());
+      allow delete: if isSignedIn() && (resource.data.studentUid == request.auth.uid || isAdmin());
+    }
+  }
+}

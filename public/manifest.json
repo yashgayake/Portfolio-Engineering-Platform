@@ -1,0 +1,17 @@
+{
+  "name": "Yash Gayake Portfolio & Academy",
+  "short_name": "YashGayake",
+  "description": "Next-Gen 3D Robotics & Software Engineering Portfolio and Student Academy",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0c",
+  "theme_color": "#06b6d4",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}

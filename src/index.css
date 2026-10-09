@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Light Mode & Dark Mode Neutral Token Palette
+   In Tailwind CSS v4, palette utilities (bg-neutral-*, text-neutral-*, border-neutral-*)
+   read from --color-neutral-*. By setting them dynamically on html:not(.dark) vs html.dark,
+   the entire application seamlessly transforms between pristine, high-contrast Light mode
+   and modern cyber Dark mode. */
+
+:root,
+html:not(.dark),
+html.light {
+  color-scheme: light;
+
+  --color-neutral-950: #f8fafc; /* Canvas background: clean, high-clarity slate-50 */
+  --color-neutral-900: #ffffff; /* Card / Surface background: pure crisp white */
+  --color-neutral-800: #e2e8f0; /* Card borders & dividers: subtle slate-200 */
+  --color-neutral-700: #cbd5e1; /* Active/hover borders: slate-300 */
+  --color-neutral-600: #94a3b8; /* Muted accents: slate-400 */
+  --color-neutral-500: #64748b; /* Subtle / secondary text: slate-500 */
+  --color-neutral-400: #475569; /* Supporting text / icons: slate-600 */
+  --color-neutral-300: #334155; /* Body copy text: slate-700 */
+  --color-neutral-200: #1e293b; /* Subheadings: slate-800 */
+  --color-neutral-100: #0f172a; /* Primary titles & headings: slate-900 */
+  --color-neutral-50: #020617;  /* High-emphasis text: slate-950 */
+}
+
+html.dark {
+  color-scheme: dark;
+
+  --color-neutral-950: #0a0a0c; /* Deep obsidian background */
+  --color-neutral-900: #121216; /* Elevated card surface */
+  --color-neutral-800: #22222b; /* Subtle dark border */
+  --color-neutral-700: #2d2d38; /* Elevated border / hover */
+  --color-neutral-600: #4b4b58; /* Muted badges */
+  --color-neutral-500: #71717a; /* Subtle timestamps / meta */
+  --color-neutral-400: #a1a1aa; /* Secondary body / icon text */
+  --color-neutral-300: #d4d4d8; /* Standard body copy */
+  --color-neutral-200: #e4e4e7; /* Subheadings */
+  --color-neutral-100: #f4f4f5; /* Primary headings */
+  --color-neutral-50: #fafafa;  /* Brightest emphasis */
+}
+
+@layer base {
+  :root {
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  html {
+    transition: background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-neutral-950);
+    color: var(--color-neutral-100);
+  }
+
+  code, pre, .font-mono {
+    font-family: var(--font-mono);
+  }
+}
+
+/* Ensure strong, high-contrast dark text on bright cyan action buttons in both light & dark modes */
+button.bg-cyan-500,
+a.bg-cyan-500,
+.bg-cyan-500.text-neutral-950,
+.bg-cyan-400.text-neutral-950 {
+  color: #020617 !important;
+}
+
+/* Light mode card elevation & contrast refinement */
+html:not(.dark) [class*="bg-neutral-900"],
+html:not(.dark) [class*="bg-neutral-900/40"],
+html:not(.dark) [class*="bg-neutral-900/30"] {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.03);
+}
+
+/* Light mode modal backdrop dimming */
+html:not(.dark) .fixed.inset-0.z-50 {
+  background-color: rgba(15, 23, 42, 0.45);
+}
+
+/* Light / Dark Adaptive Scrollbar */
+html:not(.dark) ::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+html:not(.dark) ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+html:not(.dark) ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: #0a0a0c;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: #22222b;
+  border-radius: 4px;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #3f3f4e;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
